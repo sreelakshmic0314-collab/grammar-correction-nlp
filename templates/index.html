@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grammar Correction Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <main class="desk">
+    <header class="desk__header">
+      <p class="desk__kicker">A pretrained T5 model reads your sentence and rewrites it correctly</p>
+      <h1 class="desk__title">Grammar Correction Desk</h1>
+    </header>
+
+    <form class="sheet" method="POST" action="/">
+      <label class="sheet__label" for="text">Your text</label>
+      <textarea
+        class="sheet__input"
+        id="text"
+        name="text"
+        rows="6"
+        placeholder="Type or paste a sentence with grammar mistakes, e.g. &quot;She don't likes going to school on Mondays.&quot;"
+        required
+      >{{ original_text }}</textarea>
+      <div class="sheet__actions">
+        <button type="submit" class="sheet__button">Check grammar</button>
+      </div>
+    </form>
+
+    {% if submitted %}
+    <section class="result">
+      {% if error_count == 0 %}
+        <p class="result__status result__status--clean">No changes needed — this sentence already looks grammatically correct.</p>
+      {% else %}
+        <p class="result__status">Found {{ error_count }} change{{ 's' if error_count != 1 else '' }}.</p>
+      {% endif %}
+
+      <div class="result__block">
+        <h2 class="result__heading">What changed</h2>
+        <p class="result__diff">{{ diff_html | safe }}</p>
+        <p class="result__legend">
+          <span class="legend__swatch legend__swatch--del"></span> removed
+          <span class="legend__swatch legend__swatch--add"></span> added
+        </p>
+      </div>
+
+      <div class="result__block">
+        <h2 class="result__heading">Corrected text</h2>
+        <p class="result__corrected">{{ corrected_text }}</p>
+      </div>
+    </section>
+    {% endif %}
+  </main>
+
+</body>
+</html>
