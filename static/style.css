@@ -1,0 +1,201 @@
+/* ---------------------------------------------------------------
+   Design tokens
+   Concept: a quiet writing desk / proofreader's page. A single
+   warm ink accent for corrections, everything else calm and neutral.
+----------------------------------------------------------------- */
+:root {
+  --paper: #F1F0EC;
+  --paper-raised: #FFFFFF;
+  --ink: #1F2320;
+  --ink-soft: #5B6058;
+  --line: #D9D6CC;
+  --add: #2E6B5E;
+  --add-bg: #E4F0EC;
+  --del: #A6472F;
+  --del-bg: #F6E7E2;
+  --focus: #2E5D6B;
+
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 2.1em;
+  background-position: 0 7.4em;
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.5;
+}
+
+.desk {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.desk__header {
+  margin-bottom: 2.5rem;
+}
+
+.desk__kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.desk__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2.4rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   The input sheet
+----------------------------------------------------------------- */
+.sheet {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(20, 20, 15, 0.04);
+}
+
+.sheet__label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.6rem;
+}
+
+.sheet__input {
+  width: 100%;
+  resize: vertical;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink);
+  border: none;
+  outline: none;
+  padding: 0;
+  background: transparent;
+}
+
+.sheet__input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.sheet__actions {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sheet__button {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--paper-raised);
+  background: var(--ink);
+  border: none;
+  border-radius: 3px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sheet__button:hover { background: #33382f; }
+.sheet__button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------------------------------------------------------------
+   Results
+----------------------------------------------------------------- */
+.result {
+  margin-top: 2.5rem;
+}
+
+.result__status {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+
+.result__status--clean { color: var(--add); }
+
+.result__block + .result__block {
+  margin-top: 1.75rem;
+}
+
+.result__heading {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 0 0.6rem;
+}
+
+.result__diff,
+.result__corrected {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.result__diff .del {
+  color: var(--del);
+  background: var(--del-bg);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  padding: 0.05em 0.2em;
+  border-radius: 2px;
+}
+
+.result__diff .add {
+  color: var(--add);
+  background: var(--add-bg);
+  padding: 0.05em 0.2em;
+  border-radius: 2px;
+}
+
+.result__legend {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend__swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  margin-left: 0.6rem;
+}
+
+.legend__swatch:first-child { margin-left: 0; }
+.legend__swatch--del { background: var(--del-bg); border: 1px solid var(--del); }
+.legend__swatch--add { background: var(--add-bg); border: 1px solid var(--add); }
+
+/* ---------------------------------------------------------------
+   Responsive
+----------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .desk { padding: 2.5rem 1.25rem 3rem; }
+  .desk__title { font-size: 1.9rem; }
+}
