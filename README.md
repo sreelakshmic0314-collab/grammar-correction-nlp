@@ -49,18 +49,30 @@ output in your report's results section.
 ## 2. Project structure
 
 ```
-grammar-correction-project/
-├── app.py                      # Flask app: model loading, correction, diffing, routes
-├── evaluate.py                 # GLEU-score evaluation script for your report
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── PROJECT_REPORT_OUTLINE.md   # Suggested structure for your academic report
-├── templates/
-│   └── index.html              # Web page (Jinja2 template)
-├── static/
-│   └── style.css                # Styling
-└── sample_data/
-    └── test_sentences.txt      # Example sentences to paste into the app for a demo
+grammar-correction-nlp/
+├── app.py                    # Flask web application
+├── evaluate.py               # Model evaluation
+├── requirements.txt          # Python dependencies
+├── README.md                 # Project documentation
+├── PROJECT_REPORT_OUTLINE.md # Report outline
+├── detection/                # Grammar error detection
+│   ├── predict.py
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── test.py
+│   ├── requirements.txt
+│   └── README_DETECTION.md
+├── models/                   # Trained ML models and files
+│   ├── grammar_classifier.joblib
+│   ├── tfidf_vectorizer.joblib
+│   ├── test_split.csv
+│   └── confusion_matrix.png
+├── sample_data/              # Sample input data
+│   └── sample_labeled_sentences.csv
+├── templates/                # HTML templates
+│   └── index.html
+└── static/                   # CSS styling
+    └── style.css
 ```
 
 ---
